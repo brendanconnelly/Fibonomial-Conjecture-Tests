@@ -1,39 +1,16 @@
-# Fibonomial Conjecture Tests
+# Unimodality of $q$-Fibonomial Coefficients
 
-Computational verification of unimodality and symmetry conjectures for q-Fibonomial polynomials. Coded with the assistance of Claude (Anthropic).
+Bergeron–Ceballos–Küstner introduced the $q$-Fibonomial coefficients $\binom{m+n}{n}_F$ and conjectured that they are unimodal. This paper proves the conjecture for $n \leq 3$. For $n = 2$, we give a combinatorial proof via a nearly symmetric saturated chain decomposition on path-domino tilings. For all three cases we give an algebraic proof, and for $n = 3$ we establish a more general unimodality result for certain products of $q$-analogs.
 
-## Scripts
+## Code
 
-### `fibonomial_test.py`
-Tests that the q-Fibonomial polynomial $\binom{m+n}{n}_F$ is **symmetric and unimodal** for all $m, n \geq 1$.
+Computational verification that $\binom{m+n}{n}_F$ is unimodal for all tested $m, n \geq 1$, coded with the assistance of Claude (Anthropic).
 
-- Exhaustive grid: all pairs with $m + n \leq 20$
-- Large selected pairs: $(m,n) = (k,k)$ up to $k = 16$ (degree 5,697,720)
-
-```
-python3 fibonomial_test.py [max_sum]   # default max_sum=20
-```
-
-### `conjecture_test.py`
-Tests the following conjecture about products of q-integers and q-combs:
-
-> Let $k, n \geq 2$, with $a_i$ positive integers and $n \nmid a_i$ for $i < k$. If
-> $$a_k \leq 1 + \sum_{i=1}^{k-1} \left\lfloor \frac{a_i}{n} \right\rfloor,$$
-> then $P(a_1, \dots, a_k; n) = [a_1]_q \cdots [a_{k-1}]_q [a_k]_{q^n}$ is unimodal.
-> Moreover, for $k \leq 4$ or $n \leq 3$, this condition is also necessary.
-
-Verified for $k, n \leq 6$ and $\max a_i \leq 15$ (~7.6 million polynomials). No counterexamples found.
+- `fibonomial_test.py` — core utilities: Fibonacci numbers, $q$-Fibonomial computation, unimodality check
+- `conjecture_test.py` — exhaustive test of Conjecture 2.5 for $m + n \leq 26$ and selected large pairs up to $(m, n) = (17, 16)$
 
 ```
-python3 conjecture_test.py              # default: k,n<=6, max_a<=15
-python3 conjecture_test.py --full       # full:    k,n<=10, max_a<=20
-python3 conjecture_test.py 8 8 18       # custom:  max_k max_n max_a
+python3 conjecture_test.py [max_sum]
 ```
 
-## Requirements
-
-Python 3 with numpy.
-
-```
-pip install numpy
-```
+Requires Python 3 and numpy.
